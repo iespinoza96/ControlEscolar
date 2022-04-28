@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
 
 namespace PL.Controllers
 {
@@ -33,6 +34,14 @@ namespace PL.Controllers
 		public ActionResult Form(ML.Materia materia)
 		{
 			ML.Result result = new ML.Result();
+
+			char[] ValidacionNombreMateria = ConfigurationManager.AppSettings["ValidacionNombreMateria"].ToCharArray();
+			// &<>/
+			foreach (char caracter in ValidacionNombreMateria)
+			{
+				materia.Nombre = materia.Nombre.Replace(caracter.ToString(), "");
+			}
+
 			if (materia.IdMateria == 0)
 			{
 				result = BL.Materia.Add(materia);

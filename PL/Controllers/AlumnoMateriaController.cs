@@ -28,7 +28,6 @@ namespace PL.Controllers
             }
         }//termina GetAll
 
-
         [HttpGet]
         public ActionResult MateriaGetAsignada(int? IdAlumno)
         {
@@ -123,15 +122,16 @@ namespace PL.Controllers
 
                     alumnomateria.Materia = new ML.Materia();
                     alumnomateria.Materia.IdMateria = int.Parse(IdMateria);
-                    ML.Result result = BL.AlumnoMateria.Add(alumnomateria);
+                        ML.Result result = BL.AlumnoMateria.Add(alumnomateria);
                 }
             }
             else
             {
 
             }
-            return RedirectToAction("GetMateriasAsignadasByAlumno", alumnoMateria.Alumno);
+            return RedirectToAction("MateriaGetAsignada", alumnoMateria.Alumno);
+
         }
 
-	}
+    }
 }
